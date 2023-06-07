@@ -150,6 +150,17 @@ public class Deck : MonoBehaviour
     }
     public GameObject ShowbossList;
     public GameObject bossImage;
+    public List<int> RandomCardPool;
+    public List<int> GetRandomCards(int amount)
+    {
+        List<int> c = new List<int>();
+        for (int i = 0; i < amount; i++)
+        {
+            c.Add(RandomCardPool[(int)Random.Range(0, RandomCardPool.Count-1)]);
+        }
+        return c;
+    }
+
     void Start()
     {
         int index = 0;
@@ -161,6 +172,7 @@ public class Deck : MonoBehaviour
         else
         {
             dl = deckList;
+            dl.AddRange(GetRandomCards(10));
         }
         foreach (var i in dl)
         {

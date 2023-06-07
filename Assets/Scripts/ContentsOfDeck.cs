@@ -143,6 +143,7 @@ public class ContentsOfDeck : MonoBehaviour
     [SerializeField]List<GameObject> displayedCards = new List<GameObject>();
     private void DisplayListOfCards(List<GameObject> listOfCards)
     {
+        displayedCards = new List<GameObject>();
         float cardZvalue = 0f;
 
         Vector2 gridStartPosition = _gridStartPosition;
@@ -222,9 +223,19 @@ public class ContentsOfDeck : MonoBehaviour
 
     private List<GameObject> GetListOfCards(List<Card> compareToList)
     {
-        _cardsInGame = new List<GameObject>(GameObject.FindGameObjectsWithTag("Card"));
+        _cardsInGame = new List<GameObject>();
+        foreach(Card c in Deck.Instance.BattleDeck) {
+            _cardsInGame.Add(c.gameObject);
+        }
+        foreach (Card c in Deck.Instance.BattleDiscardPile)
+        {
+            _cardsInGame.Add(c.gameObject);
+        }
+        foreach (Card c in Deck.Instance.ExaustPile)
+        {
+            _cardsInGame.Add(c.gameObject);
+        }
         List<GameObject> finalList = new List<GameObject>();
-
         /**
          *  Get all gameobject which has Card component and are in compareToList.
          */
@@ -386,6 +397,7 @@ public class ContentsOfDeck : MonoBehaviour
         _currentTask = newTask;
         RemoveSelectedCardsHighlight();
         _selectedCards.Clear();
+        displayedCards = new List<GameObject>();
         _maximumNumberOfSelectedCards = maxSelected;
     }
 
