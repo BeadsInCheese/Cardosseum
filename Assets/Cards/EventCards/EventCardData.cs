@@ -58,7 +58,7 @@ public class EventCardData : ScriptableObject
 
     }
     public void Trigger(){
-            Instantiate(Deck.Instance.eventBase).GetComponent<EventCard>().CreateEventCard(this);
+            Instantiate(Deck.Instance.eventBase).GetComponent<EventCard>().CreateEventCard(this,false);
             Deck.Instance.eventVisible = true;
 
     }

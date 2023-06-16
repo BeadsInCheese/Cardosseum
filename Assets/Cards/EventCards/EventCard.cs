@@ -20,6 +20,7 @@ public class EventCard : MonoBehaviour
     public GameObject deckAnchor;
 
     #region Animation Parameters
+    public bool slide = true;
     private Vector3 slideStartRotation = new Vector3(0f, 0f, 18.45f);
     private Vector3 slideEndRotation = Vector3.zero;
     private float cardMinimalSize = 0.15f;
@@ -33,8 +34,12 @@ public class EventCard : MonoBehaviour
 
     private List<BattleCardTipTool> cardTipTools = new List<BattleCardTipTool>();
 
-
-    public void CreateEventCard(EventCardData data) {
+    public void CreateEventCard(EventCardData data,bool slide)
+    {
+        this.slide = slide;
+        CreateEventCard(data);
+    }
+        public void CreateEventCard(EventCardData data) {
         eName=data.eName;
         if(eName.Equals("")){
             eName=data.name;
@@ -192,8 +197,8 @@ public class EventCard : MonoBehaviour
     
     private void CardBornFromDeck()
     {
-        AudioManager.Instance.PlayEventCardDrawSound();
-
+            AudioManager.Instance.PlayEventCardDrawSound();
+        
         // Calculate the deck_image's local position under cardBack's parent
         // First, get deck_image localPosition under its parent Canvas
         Vector2 deckImageLocalPos;
@@ -234,32 +239,43 @@ public class EventCard : MonoBehaviour
     IEnumerator CardSlideToCenter() 
     {
         //play audio sound
-        AudioManager.Instance.PlayEventCardSlideSound();
 
+        if (slide)
+        {
+            AudioManager.Instance.PlayEventCardSlideSound();
+        }
         var slideStartTime = Time.time;
         var slideStartPos = eventCardBack.transform.position;
+        if (slide) { 
+            do
+            {
+                eventCardBack.transform.position = Vector3.Lerp(
+                    slideStartPos,
+                    eventCardFront.transform.position,
+                    (Time.time - slideStartTime) / slideAnimDuration);
 
-        do {
-            eventCardBack.transform.position = Vector3.Lerp(
-                slideStartPos, 
-                eventCardFront.transform.position,
-                (Time.time - slideStartTime)/slideAnimDuration);
+                eventCardBack.transform.eulerAngles = Vector3.Lerp(
+                    slideStartRotation, slideEndRotation,
+                    (Time.time - slideStartTime) / slideAnimDuration);
 
-            eventCardBack.transform.eulerAngles = Vector3.Lerp(
-                slideStartRotation, slideEndRotation,
-                (Time.time - slideStartTime)/slideAnimDuration);
+                yield return new WaitForEndOfFrame();
+            } while ((Time.time - slideStartTime) <= slideAnimDuration);
+        }
+        else
+        {
+            eventCardBack.transform.position = eventCardFront.transform.position;
+        }
 
-            yield return new WaitForEndOfFrame();
-        } while ((Time.time - slideStartTime) <= slideAnimDuration);
-        
         StartCoroutine("CardFlip");
     }
 
 
     IEnumerator CardFlip()
     {
-        yield return new WaitForSeconds(0.3f);
-
+        if (slide)
+        {
+            yield return new WaitForSeconds(0.3f);
+        }
         //play audio sound
         AudioManager.Instance.PlayEventCardFlipSound();
 
@@ -267,6 +283,10 @@ public class EventCard : MonoBehaviour
 
         Vector3 startScale = new Vector3(cardMinimalSize, cardMinimalSize, cardMinimalSize);
         Vector3 endScale = new Vector3(cardNormalSize, cardNormalSize, cardNormalSize);
+        if (!slide)
+        {
+            startScale=endScale;
+        }
         eventCardFront.transform.localScale = startScale;
         eventCardFront.transform.eulerAngles = flipUpAngle;
         eventCardFront.SetActive(false);
