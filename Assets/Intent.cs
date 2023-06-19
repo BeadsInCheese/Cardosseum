@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Intent : Card
@@ -115,6 +116,9 @@ public class Intent : Card
             iSpecial.gameObject.SetActive(true);
         }
     }
+
+        
+        
     public void UpdateDamageText(){
         if(Damage>0){
             dText.text=""+Damage*Deck.Instance.PlayerDamageModifier;
