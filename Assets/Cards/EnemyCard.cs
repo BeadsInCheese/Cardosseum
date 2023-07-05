@@ -276,6 +276,15 @@ IEnumerator shake(){
     {
         SceneLoader.LoadGameVictory();
     }
+    public IEnumerator fade()
+    {
+
+        for (int i = 0; i < 100; i++)
+        {
+            img.color = new Color(img.color.r, img.color.g, img.color.b, Mathf.Lerp(0, 1, (100f - i) / 100));
+            yield return 1;
+        }
+    }
     public IEnumerator Death()
     {
         var victory=Instantiate(VictoryText);
@@ -291,11 +300,7 @@ IEnumerator shake(){
         {
             GameObject.Find("Victory/Canvas/VictoryButton").GetComponent<Button>().onClick.AddListener(WinGame);
         }
-        for (int i = 0; i < 100; i++)
-        {
-            img.color = new Color(img.color.r, img.color.g, img.color.b,Mathf.Lerp(0,1,(100f-i)/100));
-            yield return 1;
-        }
+        StartCoroutine(fade());
         while (!VictoryButtonPressed)
         {
             yield return 0;
