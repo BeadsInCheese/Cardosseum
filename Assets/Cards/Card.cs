@@ -172,6 +172,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if(exaust){
             Deck.Instance.actionPoints+=Deck.Instance.gainAPOnExhaust;
+            ExplosionManager.Instance.PlayExhaustAnimation(transform.position);
         }
         if (Deck.Instance.enemy != null)
         {

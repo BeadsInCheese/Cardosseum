@@ -25,7 +25,7 @@ public class ExplosionManager : MonoBehaviour
     public GameObject manaExplosion;
     public Transform manaExplosionTarget;
     public GameObject EraseAnimation;
-
+    public GameObject exhaustAnimation;
     public GameObject StunAnimation;
     public Transform StunAnimationTarget;
     public void playCard(Card card){
@@ -45,7 +45,12 @@ public class ExplosionManager : MonoBehaviour
         Erased.transform.position= StunAnimationTarget.position+new Vector3(3,-3,0);
         Destroy(Erased,3.5f);
     }
-    public void PlayStunAnimation()
+    public void PlayExhaustAnimation(Vector3 pos)
+    {
+        var i = Instantiate(exhaustAnimation);
+        i.transform.position = pos;
+    }
+        public void PlayStunAnimation()
     {
             var i = Instantiate(StunAnimation);
             i.transform.position = StunAnimationTarget.position;

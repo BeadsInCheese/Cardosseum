@@ -5468,6 +5468,7 @@ MonoBehaviour:
   manaExplosion: {fileID: 7065928661677174765, guid: 0c07bb88ab97daeebbb42889b647d6f9, type: 3}
   manaExplosionTarget: {fileID: 1293751137}
   EraseAnimation: {fileID: 2332050747790252199, guid: 4c987722cdc05f646aa38560f5596eec, type: 3}
+  exhaustAnimation: {fileID: 8052220865066998688, guid: 0e69bc29a65dd0844ad228501df02dd6, type: 3}
   StunAnimation: {fileID: 2332050747790252199, guid: cd9c7e6d08411d140b7b0d5e24c95d4a, type: 3}
   StunAnimationTarget: {fileID: 1715163333}
 --- !u!4 &1903212949
