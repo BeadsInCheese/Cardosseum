@@ -21,7 +21,7 @@ public class ScrollControl : MonoBehaviour
     {
         Scroll.SetActive(!Deck.Instance.inBattle);
 
-        Cross1.SetActive(Deck.Instance.bossesDefeated > 0);
+        //Cross1.SetActive(Deck.Instance.bossesDefeated > 0);
         
     }
 }
