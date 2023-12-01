@@ -737,6 +737,7 @@ GameObject:
   - component: {fileID: 1156951705}
   - component: {fileID: 1156951707}
   - component: {fileID: 1156951706}
+  - component: {fileID: 1156951708}
   m_Layer: 5
   m_Name: title
   m_TagString: Untagged
@@ -761,7 +762,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 169}
+  m_AnchoredPosition: {x: 0, y: 108}
   m_SizeDelta: {x: 1230, y: 670}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1156951706
@@ -802,6 +803,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1156951704}
   m_CullTransparentMesh: 1
+--- !u!114 &1156951708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156951704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1202dbae3fbd90a49aadad6f80cc89be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  incrementY: 18.6
+  speed: 12.04
+  ac:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.003498342
+      value: 0.4052296
+      inSlope: 0.06496387
+      outSlope: 0.06496387
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.30046132
+    - serializedVersion: 3
+      time: 0.09849273
+      value: 0.62737155
+      inSlope: 2.2207832
+      outSlope: 2.2207832
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.043407016
+    - serializedVersion: 3
+      time: 0.5101801
+      value: 0.99043244
+      inSlope: -0.00030670306
+      outSlope: -0.00030670306
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.90304613
+      value: 0.6191813
+      inSlope: -1.9176149
+      outSlope: -1.9176149
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.046147756
+      outWeight: 0.073150076
+    - serializedVersion: 3
+      time: 0.9977807
+      value: 0.40194872
+      inSlope: -0.09458389
+      outSlope: -0.09458389
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2915881
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  nonlinear: 1
 --- !u!1 &1510558824
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,7 +904,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.8914795, y: 0}
+  m_AnchoredPosition: {x: 4.8916016, y: 0}
   m_SizeDelta: {x: -270.6625, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1510558826

@@ -9,6 +9,8 @@ public class FloatingItem : MonoBehaviour
     public float incrementY = 5f;
     public float speed = 7f;
     private bool isDirectionToPos1 = false;
+    public AnimationCurve ac;
+    public bool nonlinear = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,17 +21,33 @@ public class FloatingItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isDirectionToPos1)
+        if (nonlinear)
+        {
+            if (isDirectionToPos1)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, pos_1, speed * ac.Evaluate(((transform.position - pos_1).magnitude / (pos_2 - pos_1).magnitude)) * Time.deltaTime);
+                if (transform.position == pos_1)
+                    isDirectionToPos1 = false;
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, pos_2, speed * ac.Evaluate(((transform.position - pos_1).magnitude / (pos_2 - pos_1).magnitude)) * Time.deltaTime);
+                if (transform.position == pos_2)
+                    isDirectionToPos1 = true;
+            }
+            return;
+        }
+        if (isDirectionToPos1)
         {
             transform.position = Vector3.MoveTowards(transform.position, pos_1, speed * Time.deltaTime);
-            if(transform.position == pos_1)
+            if (transform.position == pos_1)
                 isDirectionToPos1 = false;
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, pos_2, speed * Time.deltaTime);
-            if(transform.position == pos_2)
+            transform.position = Vector3.MoveTowards(transform.position, pos_2, speed  * Time.deltaTime);
+            if (transform.position == pos_2)
                 isDirectionToPos1 = true;
-        }        
+        }
     }
 }
