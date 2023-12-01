@@ -14,39 +14,40 @@ public class FloatingItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pos_1 = transform.position;
-        pos_2 = new Vector3(transform.position.x, transform.position.y + incrementY, transform.position.z);
+        pos_1 = transform.localPosition;
+        pos_2 = new Vector3(transform.localPosition.x, transform.localPosition.y + incrementY, transform.localPosition.z);
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (nonlinear)
         {
             if (isDirectionToPos1)
             {
-                transform.position = Vector3.MoveTowards(transform.position, pos_1, speed * ac.Evaluate(((transform.position - pos_1).magnitude / (pos_2 - pos_1).magnitude)) * Time.deltaTime);
-                if (transform.position == pos_1)
+                transform.localPosition = Vector3.MoveTowards(transform.localPosition, pos_1, speed * ac.Evaluate(((transform.localPosition - pos_1).magnitude / (pos_2 - pos_1).magnitude)) * Time.deltaTime);
+                if (transform.localPosition == pos_1)
                     isDirectionToPos1 = false;
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, pos_2, speed * ac.Evaluate(((transform.position - pos_1).magnitude / (pos_2 - pos_1).magnitude)) * Time.deltaTime);
-                if (transform.position == pos_2)
+                transform.localPosition = Vector3.MoveTowards(transform.localPosition, pos_2, speed * ac.Evaluate(((transform.localPosition - pos_1).magnitude / (pos_2 - pos_1).magnitude)) * Time.deltaTime);
+                if (transform.localPosition == pos_2)
                     isDirectionToPos1 = true;
             }
             return;
         }
         if (isDirectionToPos1)
         {
-            transform.position = Vector3.MoveTowards(transform.position, pos_1, speed * Time.deltaTime);
-            if (transform.position == pos_1)
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, pos_1, speed * Time.deltaTime);
+            if (transform.localPosition == pos_1)
                 isDirectionToPos1 = false;
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, pos_2, speed  * Time.deltaTime);
-            if (transform.position == pos_2)
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, pos_2, speed  * Time.deltaTime);
+            if (transform.localPosition == pos_2)
                 isDirectionToPos1 = true;
         }
     }
