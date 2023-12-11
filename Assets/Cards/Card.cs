@@ -9,10 +9,15 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     // Start is called before the first frame update
     public int Damage = 0;
+    public int CardExtraDamage=0;
+    public float cardExtraDamageMod = 1;
+
     public int block = 0;
     public int magic = 0;
     public int money = 0;
     public int actionCost = 0;
+    public int id = 0;
+
     public float actionCostMultiplier=1;
     public bool exaust=false;
     public TMPro.TextMeshProUGUI description;
@@ -44,6 +49,12 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     mode outlineMode= mode.DEFAULT;
     Vector3 Defaultsize = new Vector3(1, 1, 1);
     Vector3 Bigsize = new Vector3(1f, 1f, 1f);
+
+    public int getDamage()
+    {
+        return (int)((Damage + CardExtraDamage) * cardExtraDamageMod);
+
+    }
     public void outlineColor()
     {
         //CardHighlightLineImage.transform.localScale = Bigsize;
@@ -177,9 +188,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (Deck.Instance.enemy != null)
         {
             if(!Deck.Instance.PlayerConfused){
-                Deck.Instance.enemy.takeDamage( Damage);
+                Deck.Instance.enemy.takeDamage(getDamage());
             }else{
-                Deck.Instance.takeDamage(Damage);
+                Deck.Instance.takeDamage(getDamage());
             }
         }
 
@@ -256,7 +267,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public virtual void createCard(BattleCardDataContainer data, bool saveContainerData = true) {
 
         currentBattleCardData = data;
-
+        
         if (saveContainerData)
             BattleCardData = data;
         CardSprite = data.CardImage;
@@ -272,6 +283,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         apCost.text=actionCost+"";
         ManaCost.text="";
         CardName.text=data.cardName;
+        id = data.cardName.GetHashCode();
         conditionalEffects=data.conditionalEffects;
         var temp=APImage.color;
         
@@ -504,7 +516,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void UpdateDescriptionText(float damageModifier = 1f, float blockModifier = 1f, float magicModifier = 1f, float costModifier = 1f)
     {
-        description.text = (Damage > 0 ? "Deal " + Damage * damageModifier + " Damage" : "")
+        description.text = (Damage > 0 ? "Deal " + getDamage() * damageModifier + " Damage" : "")
                                 + (block > 0 ? " Block " + block * blockModifier + " Damage" : "")
                                 + (magic > 0 ? " Gain " + magic * magicModifier + " Mana" : "")
                                 + BattleCardData.effectDescriptor;

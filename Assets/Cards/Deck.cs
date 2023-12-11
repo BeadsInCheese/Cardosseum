@@ -127,15 +127,47 @@ public class Deck : MonoBehaviour
         }
 
     }
-    public void resetCardCost(){
+    public void addExtraAttack(int id, int amount)
+    {
+        foreach (Transform card in Hand.transform)
+        {
+            var cardComponent = card.gameObject.GetComponent<Card>();
+            if (cardComponent.id == id) {
+                cardComponent.CardExtraDamage += amount;
+            }
+        }
+        foreach (Card card in BattleDeck)
+        {
+
+            if (card.id == id)
+            {
+                card.CardExtraDamage += amount;
+            }
+        }
+        foreach (Card card in BattleDiscardPile)
+        {
+            if (card.id == id)
+            {
+                card.CardExtraDamage += amount;
+            }
+        }
+
+    }
+    public void resetCards(){
         foreach(Card i in BattleDeck){
             i.setCardCostmulti(1);
+            i.CardExtraDamage = 0;
+            i.cardExtraDamageMod = 1;
         }
         foreach(Card i in ExaustPile){
             i.setCardCostmulti(1);
+            i.CardExtraDamage = 0;
+            i.cardExtraDamageMod = 1;
         }
         foreach(Card i in BattleDiscardPile){
             i.setCardCostmulti(1);
+            i.CardExtraDamage = 0;
+            i.cardExtraDamageMod = 1;
         }
 
     }
@@ -686,7 +718,17 @@ public void statusCleanup(){
 
     public void ResetDeck()
     {
-        resetCardCost();
+        while (Hand.transform.childCount > 0)
+        {
+            foreach (Transform i in Hand.transform)
+            {
+                i.parent = null;
+                BattleDeckAdd(i.gameObject.GetComponent<Card>());
+                i.position = new Vector2(1000000, 100000);
+                continue;
+            }
+        }
+        resetCards();
         removeAllStatuses();
         putExaustPileBackInDeck();
         Lucky=false;
@@ -701,16 +743,7 @@ public void statusCleanup(){
         Debug.Log("Reset Deck");
         //moves all cards back to deck 
         shuffleDiscardPileBackInDeck();
-        while (Hand.transform.childCount > 0)
-        {
-            foreach (Transform i in Hand.transform)
-            {
-                i.parent = null;
-                BattleDeckAdd(i.gameObject.GetComponent<Card>());
-                i.position = new Vector2(1000000, 100000);
-                continue;
-            }
-        }
+
         actionPoints = MaxactionPoints;
     }
     public void removeAllStatuses()

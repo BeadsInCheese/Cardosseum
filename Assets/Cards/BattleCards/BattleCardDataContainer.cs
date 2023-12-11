@@ -51,6 +51,11 @@ public class BattleCardDataContainer : ScriptableObject
     {
         Deck.Instance.BattleDeckAddCardFromCardData(this);
 
+    }public void addExtraDamage(int amount)
+    {
+
+        Deck.Instance.addExtraAttack(cardName.GetHashCode(),amount);
+
     }
     public void addForEnemy(string enemy){
         List<BattleCardDataContainer> output;
