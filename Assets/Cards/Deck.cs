@@ -25,6 +25,7 @@ public class Deck : MonoBehaviour
     internal int bossCounter=0;
     public int MaxHp = 20;
     public int Hp = 0;
+    public int difficulty = 1;
     public bool Lucky=false;
     public int block = 0;
     public int MaxactionPoints = 3;
