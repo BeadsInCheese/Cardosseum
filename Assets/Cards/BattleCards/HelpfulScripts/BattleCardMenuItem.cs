@@ -6,6 +6,26 @@ using UnityEngine;
     [Serializable]
 public class BattleCardMenuItem 
 {
+    public static void Activate(List<BattleCardMenuItem> conditionalEffects)
+    {
+        foreach (BattleCardMenuItem i in conditionalEffects)
+        {
+            bool exec = true;
+
+            foreach (var j in i.conditions)
+            {
+                if (!j.Evaluate())
+                {
+                    exec = false;
+                }
+            }
+            if (exec)
+            {
+                BattleCardMenuItem.Activate(i.ConditionalEffects, i.independentRNG);
+            }
+
+        }
+    }
     public static void Activate(List<Effect> effects,bool Independent)
     {
         var sumOfprob=0.0f;

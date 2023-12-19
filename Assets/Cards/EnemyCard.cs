@@ -141,8 +141,8 @@ IEnumerator shake(){
         int affectedBattleCardIndex = (Deck.Instance.enemyAffectedByCombatRewards.ContainsKey(data))?
             Deck.Instance.enemyAffectedByCombatRewards[data] : -1;
         name=data.name;
-        HP = data.HP+(int)(Deck.Instance.difficulty * data.HP*0.1f);
-        maxHP = data.HP + (int)(Deck.Instance.difficulty * data.HP * 0.1f);
+        HP = data.HP+(int)(Deck.difficulty * data.HP*0.1f);
+        maxHP = data.HP + (int)(Deck.difficulty * data.HP * 0.1f);
         MaxDamageRange = data.MaxDamageRange;
         MinDamageRange = data.MinDamageRange;
         postBattleEvent = data.postBattleEvent;

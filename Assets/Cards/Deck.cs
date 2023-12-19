@@ -25,7 +25,7 @@ public class Deck : MonoBehaviour
     internal int bossCounter=0;
     public int MaxHp = 20;
     public int Hp = 0;
-    public int difficulty = 1;
+    public static int difficulty = 1;
     public bool Lucky=false;
     public int block = 0;
     public int MaxactionPoints = 3;
@@ -585,6 +585,7 @@ public class Deck : MonoBehaviour
                 card.status = Card.BelongTo.PlayerHand;
                 var deckPos = Deck.Instance.getPosition();
                 card.transform.position = deckPos;
+                BattleCardMenuItem.Activate(card.BattleCardData.DrawEventConditionalEffects);
                 card.gameObject.transform.parent = Hand.transform;
                 
                 var startPos = new Vector3(deckPos.x, deckPos.y, transform.position.z);

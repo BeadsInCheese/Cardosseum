@@ -18,7 +18,8 @@ public class BattleCardDataContainer : ScriptableObject
     public int money = 0;
     public int actionCost = 0;
     public UnityEvent effect;
-    public List<BattleCardMenuItem> conditionalEffects;    
+    public List<BattleCardMenuItem> conditionalEffects;
+    public List<BattleCardMenuItem> DrawEventConditionalEffects;
     public bool exaust=false;
 
     [Header("Special effect")]

@@ -8,7 +8,11 @@ public class SceneLoader : MonoBehaviour
       static public void LoadGame(){
         SceneManager.LoadScene("Game");
     }
-        static public void LoadMainMenu(){
+    static public void Customize()
+    {
+        SceneManager.LoadScene("Runmodifiers");
+    }
+    static public void LoadMainMenu(){
             SceneManager.LoadScene("MainMenu");
         }
         static public void LoadGameOver(){
