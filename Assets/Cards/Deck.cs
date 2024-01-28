@@ -792,7 +792,19 @@ public void statusCleanup(){
         j.transform.position = new Vector2(1000000, 100000);
         BattleDeckAdd(j);
     }
-    
+    public void EnemyDeckAddCardFromCardData(BattleCardDataContainer cardData)
+    {
+        var card = Instantiate(enemy.cardPrefab).GetComponent<Intent>();
+        card.createCard(cardData);
+        var scale = CardHandler.Instance.cardScaleInEnermyDeck;
+        card.transform.localScale = new Vector3(scale, scale, scale);
+        enemy.cards.Add(card);
+        card.transform.parent = enemy.enemyDeck.transform;
+        card.status = Card.BelongTo.Enermy;
+        enemy.PostCardAddCleanup();
+
+    }
+
     // Return the deck position under world coordination
     public Vector3 getPosition()
     {

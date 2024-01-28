@@ -68,6 +68,13 @@ public class BattleCardDataContainer : ScriptableObject
             Deck.Instance.CardsToAdd[enemy].Add(this);
         }
     }
+    public void addForEnemy()
+    {
+        if (Deck.Instance.enemy != null)
+        {
+            Deck.Instance.EnemyDeckAddCardFromCardData(this);
+        }
+    }
     public void removeStatusEffects(){
         Deck.Instance.removeAllStatuses();
 

@@ -133,6 +133,17 @@ IEnumerator shake(){
     }
     int maxHP;
     bool lastBoss;
+
+    public void PostCardAddCleanup()
+    {
+        decks = enemyDeck.transform.childCount;
+        for (int i = 0; i < decks; i++)
+        {
+            t.Add(1 - i * (1f / decks));
+            dirs.Add(false);
+        }
+        reorganize();
+    }
     public void Create(CreatureDataContainer data)
     {
         lastBoss = data.lastBoss;
