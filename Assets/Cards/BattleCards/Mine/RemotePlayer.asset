@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RemotePlayer
   m_EditorClassIdentifier: 
   IsEnemySpecialCard: 0
-  effectDescriptor: 
+  effectDescriptor: Give a mine to the enemy
   cardName: Remote controller
   Damage: 0
   block: 0

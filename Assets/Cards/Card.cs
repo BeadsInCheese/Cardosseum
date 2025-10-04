@@ -223,6 +223,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         actionCostMultiplier=amount;
         apCost.text=actionCost+"";
     }
+
     public IEnumerator EnemyPlayCard(EnemyCard e){
         if (!e.confused)
         {
@@ -298,7 +299,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         ManaImage.sprite=ManaSprite;
         ManaCost.text+=-magic;
         }
-        description.text =(data.Damage>0? "Deal " +data.Damage+" Damage":"")+(data.block>0? " Block "+data.block+" Damage":"")+(data.magic>0? " Gain "+data.magic+" Mana":"")+data.effectDescriptor;
+        description.text =(data.Damage+CardExtraDamage>0? "Deal " +getDamage()+" Damage":"")+(data.block>0? " Block "+data.block+" Damage":"")+(data.magic>0? " Gain "+data.magic+" Mana":"")+data.effectDescriptor;
     }
 
     private bool movable = false;
@@ -344,7 +345,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         // the card is movable, and it has not reached the destination.
         transform.position = Vector3.Lerp(transform.position, moveTargetPosition, (Time.time - moveStartTime)/moveDuration);
     }
-
+    public void setExtraDamage(int damage)
+    {
+        CardExtraDamage = damage;
+        UpdateDescriptionText();
+    }
     public void moveToTargetPos(Vector3 targetPos)
     {
         transform.position = Vector3.Lerp(transform.position, targetPos, (Time.time - moveStartTime)/moveDuration);

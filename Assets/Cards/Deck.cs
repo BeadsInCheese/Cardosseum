@@ -134,7 +134,7 @@ public class Deck : MonoBehaviour
         {
             var cardComponent = card.gameObject.GetComponent<Card>();
             if (cardComponent.id == id) {
-                cardComponent.CardExtraDamage += amount;
+                cardComponent.setExtraDamage(cardComponent.CardExtraDamage + amount);
             }
         }
         foreach (Card card in BattleDeck)
@@ -142,14 +142,14 @@ public class Deck : MonoBehaviour
 
             if (card.id == id)
             {
-                card.CardExtraDamage += amount;
+                card.setExtraDamage(card.CardExtraDamage + amount);
             }
         }
         foreach (Card card in BattleDiscardPile)
         {
             if (card.id == id)
             {
-                card.CardExtraDamage += amount;
+                card.setExtraDamage(card.CardExtraDamage + amount);
             }
         }
 
@@ -157,17 +157,17 @@ public class Deck : MonoBehaviour
     public void resetCards(){
         foreach(Card i in BattleDeck){
             i.setCardCostmulti(1);
-            i.CardExtraDamage = 0;
+            i.setExtraDamage(  0);
             i.cardExtraDamageMod = 1;
         }
         foreach(Card i in ExaustPile){
             i.setCardCostmulti(1);
-            i.CardExtraDamage = 0;
+            i.setExtraDamage(0);
             i.cardExtraDamageMod = 1;
         }
         foreach(Card i in BattleDiscardPile){
             i.setCardCostmulti(1);
-            i.CardExtraDamage = 0;
+            i.setExtraDamage(0);
             i.cardExtraDamageMod = 1;
         }
 
@@ -189,7 +189,7 @@ public class Deck : MonoBehaviour
         List<int> c = new List<int>();
         for (int i = 0; i < amount; i++)
         {
-            c.Add(RandomCardPool[(int)Random.Range(0, RandomCardPool.Count-1)]);
+            c.Add(RandomCardPool[(int)Random.Range(0, RandomCardPool.Count)]);
         }
         return c;
     }

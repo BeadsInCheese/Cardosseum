@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Preparation
   m_EditorClassIdentifier: 
   IsEnemySpecialCard: 0
-  effectDescriptor: Cards in hand cost 0
+  effectDescriptor: Cards in hand cost 0 exhaust
   cardName: Preparation
   Damage: 0
   block: 0
@@ -36,7 +36,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   conditionalEffects: []
-  exaust: 0
+  DrawEventConditionalEffects: []
+  exaust: 1
   hasSpecialEffect: 0
   cardsMustBeInHand: 0
   AudioOnPlay: {fileID: 0}
